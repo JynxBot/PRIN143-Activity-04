@@ -1,91 +1,128 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "https://example.com/schema.playlist.json",
-    "title": "playlist",
+    "title": "Playlist",
     "description": "Playlist for Music",
-    "type": [
-        "object",
-        "array"
-    ],
-    "items": {
-        "properties": {
-            "title": {
-                "type": "string",
-                "description": "Title of the song",
-                "minLength": 1,
-                "maxLength": 20
-            },
-            "artist": {
-                "type": "string",
-                "description": "string",
-                "minLength": 1,
-                "maxLength": 20
-            },
-            "album": {
-                "type": "string",
-                "description": "Album of the song",
-                "minLength": 1,
-                "maxLength": 20
-            },
-            "releaseYear": {
-                "type": "integer",
-                "exclusiveMinimum": 1990,
-                "exclusiveMaximum": 2025
-            },
-            "duration": {
+    "type": "object",
+    "properties": {
+        "playlist": {
+            "type": "array",
+            "items": {
                 "type": "object",
                 "properties": {
-                    "minutes": {
-                        "type": "integer",
-                        "exclusiveMinimum": 0
+                    "songTitle": {
+                        "type": "string",
+                        "description": "Title of the song",
+                        "minLength": 1,
+                        "maxLength": 20
                     },
-                    "seconds": {
+                    "title": {
+                        "type": "string",
+                        "description": "Alternative field for song title",
+                        "minLength": 1,
+                        "maxLength": 20
+                    },
+                    "artist": {
+                        "type": "string",
+                        "description": "Artist of the song",
+                        "minLength": 1,
+                        "maxLength": 20
+                    },
+                    "album": {
+                        "type": "string",
+                        "description": "Album of the song",
+                        "minLength": 1,
+                        "maxLength": 20
+                    },
+                    "releaseYear": {
                         "type": "integer",
-                        "exclusiveMinimum": 0
+                        "minimum": 1990,
+                        "maximum": 2025
+                    },
+                    "duration": {
+                        "type": "object",
+                        "properties": {
+                            "minutes": {
+                                "type": "integer",
+                                "minimum": 0
+                            },
+                            "seconds": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 59
+                            }
+                        },
+                        "required": [
+                            "minutes",
+                            "seconds"
+                        ]
+                    },
+                    "statistics": {
+                        "type": "object",
+                        "description": "Song statistics",
+                        "properties": {
+                            "plays": {
+                                "type": "integer",
+                                "minimum": 0
+                            },
+                            "likes": {
+                                "type": "integer",
+                                "minimum": 0
+                            },
+                            "shares": {
+                                "type": "integer",
+                                "minimum": 0
+                            }
+                        },
+                        "required": [
+                            "plays",
+                            "likes",
+                            "shares"
+                        ]
+                    },
+                    "inDevice": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
+                    },
+                    "platforms": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "Spotify",
+                                "AppleMusic",
+                                "Youtube"
+                            ]
+                        }
                     }
-                }
-            },
-            "statistics": {
-                "type": "object",
-                "description": "Songs statistics",
-                "properties": {
-                    "plays": {
-                        "type": "integer",
-                        "exclusiveMinimum": 0
+                },
+                "required": [
+                    "artist",
+                    "album",
+                    "releaseYear",
+                    "duration",
+                    "statistics",
+                    "inDevice",
+                    "platforms"
+                ],
+                "anyOf": [
+                    {
+                        "required": [
+                            "songTitle"
+                        ]
                     },
-                    "likes": {
-                        "type": "integer",
-                        "exclusiveMinimum": 0
-                    },
-                    "shares": {
-                        "type": "integer",
-                        "exclusiveMinimum": 0
+                    {
+                        "required": [
+                            "title"
+                        ]
                     }
-                }
-            },
-            "inDevice": {
-                "type": [
-                    "boolean",
-                    "null"
-                ]
-            },
-            "platforms": {
-                "enum": [
-                    "Spotify",
-                    "AppleMusic",
-                    "Youtube"
                 ]
             }
-        },
-        "required": [
-            "title",
-            "artist",
-            "album",
-            "releaseYear",
-            "duration",
-            "statistics",
-            "inDevice",
-            "platforms"
-        ]
-    }
+        }
+    },
+    "required": [
+        "playlist"
+    ]
 }

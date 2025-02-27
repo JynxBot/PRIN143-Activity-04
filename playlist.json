@@ -2,7 +2,7 @@
 "$schema": "./schema.playlist.json",
   "playlist": [
     {
-      "title": "Ang Huling El Bimbo",
+      "songTitle": "Ang Huling El Bimbo",
       "artist": "Eraserheads",
       "album": "Cutterpillow",
       "releaseYear": 1998,
